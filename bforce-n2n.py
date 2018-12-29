@@ -59,7 +59,7 @@ print('Done! Wordslist ready to use.')
 print('List Count:9875894')
 print('')
 
-tm    = datetime.datetime.now();
+tm    = datetime.datetime.now()
 print('Using your list in a minutes, ngopi dulu sana')
 time.sleep(3)
 strtime     = 'Starting time %s' % (tm)
@@ -70,16 +70,22 @@ print(strtime)
 with open('Top304Thousand-probable-v2.txt') as f:
     wordl = f.readlines()
 
+starun  = 5     #start unreachable
+totun   = 10    #total unreachable
+
+rex    = 0
+res    = 0
 for idx, l in enumerate(wordl):
+    rex += 1
 
-    if idx <= 5 :
-
-        a   = wordl[idx].strip()
-        b   = wordl[idx+100].strip()
-        print("%s:3306 MYSQL - [%s/9875894] - Trying username:'%s' with password:'%s'" % (tgt, idx, b,a))
-        time.sleep(1)
-        print("%s:3306 MYSQL - [%s/9875894] - failed to login as '%s' with password:'%s'" % (tgt, idx, b,a))
+    if rex >= starun and rex <= starun+totun:
+        print('Destination host unreachable.')
         time.sleep(1)
     else :
-        print('Destination host unreachable.')
+        res += 1
+        a   = wordl[idx].strip()
+        b   = wordl[idx+100].strip()
+        print("%s:3306 MYSQL - [%s/9875894] - Trying username:'%s' with password:'%s'" % (tgt, res, b,a))
+        time.sleep(1)
+        print("%s:3306 MYSQL - [%s/9875894] - failed to login as '%s' with password:'%s'" % (tgt, res, b,a))
         time.sleep(1)
